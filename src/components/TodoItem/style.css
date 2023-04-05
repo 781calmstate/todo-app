@@ -1,38 +1,38 @@
 .todoItem {
-  display: flex;
-  width: 29.5%;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 15px;
-  background-image: url("../../img/todoItem_background.jpg");
-  background-position: center right;
+    display: flex;
+    width: 29.5%;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 15px;
+    background-image: url('../../img/todoItem_background.jpg');
+    background-position: center right;
 }
 .todoItem__text {
-  overflow: hidden;
-  flex: 1;
-  padding: 5px;
-  border: none;
-  font-size: 20px;
+    overflow: hidden;
+    flex: 1;
+    padding: 5px;
+    border: none;
+    font-size: 20px;
 }
 
 .todoItem__text:focus {
-  outline: none;
+    outline: none;
 }
 
 .icon {
-  margin-left: 10px;
-  font-size: 25px;
-  cursor: pointer;
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
 }
 
 @media (max-width: 1200px) {
-  .todoItem {
-    width: 40%;
-  }
+    .todoItem {
+        width: 40%;
+    }
 }
 
 @media (max-width: 700px) {
-  .todoItem {
-    width: 100%;
-  }
+    .todoItem {
+        width: 100%;
+    }
 }
