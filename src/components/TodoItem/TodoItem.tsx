@@ -1,8 +1,8 @@
-import React from 'react';
-import { Todo } from '../../model';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { MdOutlineDeleteOutline, MdDone } from 'react-icons/md';
-import './style.css';
+import React from "react";
+import { Todo } from "../../model";
+import { AiOutlineEdit } from "react-icons/ai";
+import { MdOutlineDeleteOutline, MdDone } from "react-icons/md";
+import "./style.css";
 
 interface Props {
   todo: Todo;
@@ -12,7 +12,11 @@ interface Props {
 
 const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   const handleDone = (id: number) => {
-    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo)));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
   };
 
   const handleDelete = (id: number) => {
