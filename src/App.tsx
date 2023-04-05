@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import './App.css';
-import Input from './components/UI/Input';
-import { Todo } from './model';
-import TodoList from './components/TodoList/TodoList';
+import { useState } from "react";
+import "./App.css";
+import Input from "./components/UI/Input";
+import { Todo } from "./model";
+import TodoList from "./components/TodoList/TodoList";
 
 const App: React.FC = () => {
-    const [todo, setTodo] = useState<string>('');
+    const [todo, setTodo] = useState<string>("");
     const [todos, setTodos] = useState<Todo[]>([]);
 
     const addTodos = (e: React.FormEvent) => {
@@ -13,7 +13,7 @@ const App: React.FC = () => {
 
         if (todo) {
             setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
-            setTodo('');
+            setTodo("");
         }
     };
 

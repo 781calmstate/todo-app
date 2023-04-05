@@ -1,7 +1,7 @@
-import React from 'react';
-import './style.css';
-import { Todo } from '../../model';
-import TodoItem from '../TodoItem/TodoItem';
+import React from "react";
+import "./style.css";
+import { Todo } from "../../model";
+import TodoItem from "../TodoItem/TodoItem";
 
 interface Props {
     todos: Todo[];
