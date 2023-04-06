@@ -16,10 +16,16 @@ const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string>(todo.title);
 
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [edit]);
+
+    const { title, id, isDone } = todo;
+
     const handleDone = (id: number) => {
         setTodos(
             todos.map((todo) =>
-                todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+                todo.id === id ? { ...todo, isDone: !isDone } : todo
             )
         );
     };
@@ -28,8 +34,8 @@ const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
-    const handleEdit = (e: React.FormEvent, id: number) => {
-        e.preventDefault();
+    const handleEdit = (id: number, e?: React.FormEvent) => {
+        e && e.preventDefault();
         setTodos(
             todos.map((todo) =>
                 todo.id === id ? { ...todo, title: editTodo } : todo
@@ -38,17 +44,38 @@ const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
         setEdit(false);
     };
 
-    useEffect(() => {
-        inputRef.current?.focus();
-    }, [edit]);
+    const handleSubmit = (e: React.FormEvent) => {
+        if (editTodo === "") {
+            handleDelete(id);
+            return;
+        }
+        handleEdit(id, e);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEditTodo(e.target.value);
+    };
+
+    const handleEditClick = () => {
+        if (editTodo === "") {
+            handleDelete(id);
+            return;
+        }
+        if (!edit && !isDone) {
+            setEdit(!edit);
+        } else {
+            setEdit(!edit);
+            handleEdit(id);
+        }
+    };
 
     const inputRef = useRef<HTMLInputElement>(null);
     return (
-        <Draggable draggableId={todo.id.toString()} index={index}>
+        <Draggable draggableId={id.toString()} index={index}>
             {(provided, snapshot) => (
                 <form
                     className={`todoItem ${snapshot.isDragging ? "drag" : ""}`}
-                    onSubmit={(e) => handleEdit(e, todo.id)}
+                    onSubmit={handleSubmit}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
@@ -57,36 +84,23 @@ const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
                         <input
                             ref={inputRef}
                             value={editTodo}
-                            onChange={(e) => setEditTodo(e.target.value)}
+                            onChange={handleChange}
                             className="todoItem__text"
                         />
                     ) : todo.isDone ? (
-                        <s className="todoItem__text">{todo.title}</s>
+                        <s className="todoItem__text">{title}</s>
                     ) : (
-                        <span className="todoItem__text">{todo.title}</span>
+                        <span className="todoItem__text">{title}</span>
                     )}
 
                     <div>
-                        <span
-                            className="icon"
-                            onClick={() => {
-                                if (!edit && !todo.isDone) {
-                                    setEdit(!edit);
-                                }
-                            }}
-                        >
+                        <span className="icon" onClick={handleEditClick}>
                             <AiOutlineEdit />
                         </span>
-                        <span
-                            className="icon"
-                            onClick={() => handleDelete(todo.id)}
-                        >
+                        <span className="icon" onClick={() => handleDelete(id)}>
                             <MdOutlineDeleteOutline />
                         </span>
-                        <span
-                            className="icon"
-                            onClick={() => handleDone(todo.id)}
-                        >
+                        <span className="icon" onClick={() => handleDone(id)}>
                             <MdDone />
                         </span>
                     </div>
