@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/typescript-project/static/css/main.78944425.css",
-    "main.js": "/typescript-project/static/js/main.649a7d83.js",
+    "main.css": "/typescript-project/static/css/main.bae9a2ab.css",
+    "main.js": "/typescript-project/static/js/main.a1bd1ea8.js",
     "static/media/todoItem_background.jpg": "/typescript-project/static/media/todoItem_background.5658fe0875beb3430c19.jpg",
     "index.html": "/typescript-project/index.html",
-    "main.78944425.css.map": "/typescript-project/static/css/main.78944425.css.map",
-    "main.649a7d83.js.map": "/typescript-project/static/js/main.649a7d83.js.map"
+    "main.bae9a2ab.css.map": "/typescript-project/static/css/main.bae9a2ab.css.map",
+    "main.a1bd1ea8.js.map": "/typescript-project/static/js/main.a1bd1ea8.js.map"
   },
   "entrypoints": [
-    "static/css/main.78944425.css",
-    "static/js/main.649a7d83.js"
+    "static/css/main.bae9a2ab.css",
+    "static/js/main.a1bd1ea8.js"
   ]
 }
