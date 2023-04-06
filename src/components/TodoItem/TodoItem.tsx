@@ -3,16 +3,18 @@ import { Todo } from "../../model";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDeleteOutline, MdDone } from "react-icons/md";
 import "./style.css";
+import { Draggable } from "react-beautiful-dnd";
 
 interface Props {
+    index: number;
     todo: Todo;
     todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
+const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
     const [edit, setEdit] = useState<boolean>(false);
-    const [editTodo, setEditTodo] = useState<string>(todo.todo);
+    const [editTodo, setEditTodo] = useState<string>(todo.title);
 
     const handleDone = (id: number) => {
         setTodos(
@@ -30,7 +32,7 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
         e.preventDefault();
         setTodos(
             todos.map((todo) =>
-                todo.id === id ? { ...todo, todo: editTodo } : todo
+                todo.id === id ? { ...todo, title: editTodo } : todo
             )
         );
         setEdit(false);
@@ -42,39 +44,55 @@ const TodoItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
     return (
-        <form className="todoItem" onSubmit={(e) => handleEdit(e, todo.id)}>
-            {edit ? (
-                <input
-                    ref={inputRef}
-                    value={editTodo}
-                    onChange={(e) => setEditTodo(e.target.value)}
-                    className="todoItem__text"
-                />
-            ) : todo.isDone ? (
-                <s className="todoItem__text">{todo.todo}</s>
-            ) : (
-                <span className="todoItem__text">{todo.todo}</span>
-            )}
-
-            <div>
-                <span
-                    className="icon"
-                    onClick={() => {
-                        if (!edit && !todo.isDone) {
-                            setEdit(!edit);
-                        }
-                    }}
+        <Draggable draggableId={todo.id.toString()} index={index}>
+            {(provided, snapshot) => (
+                <form
+                    className={`todoItem ${snapshot.isDragging ? "drag" : ""}`}
+                    onSubmit={(e) => handleEdit(e, todo.id)}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
                 >
-                    <AiOutlineEdit />
-                </span>
-                <span className="icon" onClick={() => handleDelete(todo.id)}>
-                    <MdOutlineDeleteOutline />
-                </span>
-                <span className="icon" onClick={() => handleDone(todo.id)}>
-                    <MdDone />
-                </span>
-            </div>
-        </form>
+                    {edit ? (
+                        <input
+                            ref={inputRef}
+                            value={editTodo}
+                            onChange={(e) => setEditTodo(e.target.value)}
+                            className="todoItem__text"
+                        />
+                    ) : todo.isDone ? (
+                        <s className="todoItem__text">{todo.title}</s>
+                    ) : (
+                        <span className="todoItem__text">{todo.title}</span>
+                    )}
+
+                    <div>
+                        <span
+                            className="icon"
+                            onClick={() => {
+                                if (!edit && !todo.isDone) {
+                                    setEdit(!edit);
+                                }
+                            }}
+                        >
+                            <AiOutlineEdit />
+                        </span>
+                        <span
+                            className="icon"
+                            onClick={() => handleDelete(todo.id)}
+                        >
+                            <MdOutlineDeleteOutline />
+                        </span>
+                        <span
+                            className="icon"
+                            onClick={() => handleDone(todo.id)}
+                        >
+                            <MdDone />
+                        </span>
+                    </div>
+                </form>
+            )}
+        </Draggable>
     );
 };
 

@@ -1,14 +1,21 @@
 .todoItem {
     display: flex;
-    width: 29.5%;
     border-radius: 5px;
     padding: 20px;
     margin-top: 15px;
     background-image: url("../../img/todoItem_background.jpg");
     background-position: center right;
+    transition: 0.2s;
+}
+
+.todoItem:hover {
+    box-shadow: 0 0 5px black;
+    transform: scale(1.03);
+    cursor: pointer;
 }
 
 .todoItem__text {
+    color: black;
     overflow: hidden;
     flex: 1;
     padding: 5px;
@@ -26,14 +33,6 @@
     cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-    .todoItem {
-        width: 40%;
-    }
-}
-
-@media (max-width: 700px) {
-    .todoItem {
-        width: 100%;
-    }
+.drag {
+    box-shadow: 0 0 20px black;
 }
