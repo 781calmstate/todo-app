@@ -58,12 +58,28 @@ const App: React.FC = () => {
         setTodos(active);
     };
 
+    const toggleTodo = (id: number) => {
+        const item = todos.find((todo) => todo.id === id);
+
+        if (!item) {
+            const item = completedTodos.find((todo) => todo.id === id);
+            item && setTodos((todos) => [...todos, { ...item, isDone: false }]);
+            setCompletedTodos(completedTodos.filter((todo) => todo.id !== id));
+
+            return;
+        }
+
+        setTodos((todos) => todos.filter((todo) => todo.id !== id));
+        setCompletedTodos((todos) => [...todos, { ...item, isDone: true }]);
+    };
+
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="App">
                 <span className="heading">ToDo</span>
                 <Input todo={todo} setTodo={setTodo} addTodos={addTodos} />
                 <TodoList
+                    toggleTodo={toggleTodo}
                     todos={todos}
                     setTodos={setTodos}
                     completedTodos={completedTodos}

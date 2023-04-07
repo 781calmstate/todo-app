@@ -10,9 +10,16 @@ interface Props {
     todo: Todo;
     todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    toggleTodo: (id: number) => void;
 }
 
-const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
+const TodoItem: React.FC<Props> = ({
+    index,
+    todo,
+    todos,
+    setTodos,
+    toggleTodo
+}) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string>(todo.title);
 
@@ -23,11 +30,7 @@ const TodoItem: React.FC<Props> = ({ index, todo, todos, setTodos }) => {
     const { title, id, isDone } = todo;
 
     const handleDone = (id: number) => {
-        setTodos(
-            todos.map((todo) =>
-                todo.id === id ? { ...todo, isDone: !isDone } : todo
-            )
-        );
+        toggleTodo(id);
     };
 
     const handleDelete = (id: number) => {

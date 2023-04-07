@@ -9,13 +9,15 @@ interface Props {
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     completedTodos: Todo[];
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    toggleTodo: (id: number) => void;
 }
 
 const TodoList: React.FC<Props> = ({
     todos,
     setTodos,
     completedTodos,
-    setCompletedTodos
+    setCompletedTodos,
+    toggleTodo
 }) => {
     return (
         <div className="container">
@@ -31,6 +33,7 @@ const TodoList: React.FC<Props> = ({
                         <span className="todos__heading">Active Tasks</span>
                         {todos.map((todo, index) => (
                             <TodoItem
+                                toggleTodo={toggleTodo}
                                 index={index}
                                 key={todo.id}
                                 todo={todo}
@@ -54,6 +57,7 @@ const TodoList: React.FC<Props> = ({
                         <span className="todos__heading">Completed Tasks</span>
                         {completedTodos.map((todo, index) => (
                             <TodoItem
+                                toggleTodo={toggleTodo}
                                 index={index}
                                 key={todo.id}
                                 todo={todo}
