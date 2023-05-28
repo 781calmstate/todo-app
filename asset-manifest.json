@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/typescript-project/static/css/main.bae9a2ab.css",
-    "main.js": "/typescript-project/static/js/main.bdb76a3d.js",
-    "static/media/todoItem_background.jpg": "/typescript-project/static/media/todoItem_background.5658fe0875beb3430c19.jpg",
-    "index.html": "/typescript-project/index.html",
-    "main.bae9a2ab.css.map": "/typescript-project/static/css/main.bae9a2ab.css.map",
-    "main.bdb76a3d.js.map": "/typescript-project/static/js/main.bdb76a3d.js.map"
+    "main.css": "/todo-app/static/css/main.b920bdc3.css",
+    "main.js": "/todo-app/static/js/main.bdb76a3d.js",
+    "static/media/todoItem_background.jpg": "/todo-app/static/media/todoItem_background.5658fe0875beb3430c19.jpg",
+    "index.html": "/todo-app/index.html",
+    "main.b920bdc3.css.map": "/todo-app/static/css/main.b920bdc3.css.map",
+    "main.bdb76a3d.js.map": "/todo-app/static/js/main.bdb76a3d.js.map"
   },
   "entrypoints": [
-    "static/css/main.bae9a2ab.css",
+    "static/css/main.b920bdc3.css",
     "static/js/main.bdb76a3d.js"
   ]
 }
