@@ -1,5 +1,5 @@
 
 # ToDo
 
-[Project Page](https://781calmstate.github.io/typescript-project/)
+[Project Page](781calmstate.github.io/todo-app/)
 
